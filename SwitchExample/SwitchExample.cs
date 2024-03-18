@@ -5,16 +5,16 @@ namespace SwitchExample;
 
 [SimpleJob(runtimeMoniker: RuntimeMoniker.Net80, baseline: true)]
 [SimpleJob(runtimeMoniker: RuntimeMoniker.Net481)]
-// Fazit aus Ergebnis von BenchmarkDotNet:
-// .NET 8.0 ist schneller als .NET Framework 4.8.1 (etwa um Faktor 2)
-// Switch ist immer konstant schnell
-// IfElseIf ist nur schneller, wenn erster Vergleich erfolgreich ist
+// Conclusion from the result of BenchmarkDotNet:
+// .NET 8.0 is faster than .NET Framework 4.8.1 (by a factor of about 2)
+// Switch is always constantly fast
+// IfElseIf is only faster if first comparison is successful
 public class SwitchExample
 {
     [Params(RGB.R, RGB.G, RGB.B)]
     public RGB RGB;
 
-    // Auszug aus dem generierten IL Code (sharplab.io)
+    // Extract from the generated IL code (sharplab.io)
     // 3 mal mit kleinen Abweichungen
     // IL_000c: ldarg.0
     // IL_000d: ldfld valuetype RGB SwitchExample::RGB
@@ -43,7 +43,7 @@ public class SwitchExample
         return result;
     }
 
-    // Auszug aus dem generierten IL Code (sharplab.io)
+    // Extract from the generated IL code (sharplab.io)
     // IL_0006: switch (IL_0019, IL_0021, IL_0029)
     [Benchmark]
     public string Switch()
